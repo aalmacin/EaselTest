@@ -31,7 +31,7 @@ $(document).ready(function() {
     animations: {kick: [0, 1], attack: [2,3]}
   };
   var char1Spritesheet = new createjs.SpriteSheet(char1Data);
-  var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'attack');
+  var char1 = new Character(0, 0, 100, 20, 20, 40, 130, char1Spritesheet, 'attack');
   stage.addChild(char1);
   stage.canvas.addEventListener('click', handleClick);
 
@@ -42,23 +42,18 @@ $(document).ready(function() {
   }
 
   var keydown = function (e) {
-    console.log(e.which);
     switch(e.which) {
       case KEY_A:
         char1.moveLeft();
-        console.log(char1);
         break;
       case KEY_D:
         char1.moveRight();
-        console.log(char1);
         break;
       case KEY_W:
         char1.moveUp();
-        console.log(char1);
         break;
       case KEY_S:
         char1.moveDown();
-        console.log(char1);
         break;
     }
   };
