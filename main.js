@@ -6,6 +6,11 @@ var KEY_S = 83;
 var KEY_A = 65;
 var KEY_D = 68;
 
+var KEY_ONE = 49;
+var KEY_TWO = 50;
+var KEY_THREE = 51;
+var KEY_FOUR = 52;
+
 var KEY_J = 74;
 var KEY_K = 75;
 var KEY_L = 76;
@@ -13,42 +18,6 @@ var KEY_SEMICOLON = 186;
 
 var MAIN_STAGE = 'mainStage';
 var BACKGROUND_PATH = 'assets/images/gameArea.png';
-
-/*
-var keydown = function (e) {
-  switch(e.which) {
-    case KEY_J:
-      console.log('J');
-      break;
-    case KEY_K:
-      console.log('K');
-      break;
-    case KEY_L:
-      console.log('L');
-      break;
-    case KEY_SEMICOLON:
-      console.log(';');
-      break;
-  }
-};
-*/
-
-var keyup = function (e) {
-  switch(e.which) {
-    case KEY_Q:
-      console.log('Q');
-      break;
-    case KEY_W:
-      console.log('W');
-      break;
-    case KEY_E:
-      console.log('E');
-      break;
-    case KEY_R:
-      console.log('R');
-      break;
-  }
-};
 
 $(document).ready(function() {
   var stage = new Stage(MAIN_STAGE, BACKGROUND_PATH);
@@ -62,10 +31,55 @@ $(document).ready(function() {
     animations: {kick: [0, 1], attack: [2,3]}
   };
   var char1Spritesheet = new createjs.SpriteSheet(char1Data);
-  console.log(char1Spritesheet);
   var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'attack');
   stage.addChild(char1);
+  stage.canvas.addEventListener('click', handleClick);
 
-  //$(window).keydown(keydown);
+  function handleClick(e) {
+    //char1.targetX = e.x;
+    //char1.targetY = e.y;
+    console.log(char1);
+  }
+
+  var keydown = function (e) {
+    console.log(e.which);
+    switch(e.which) {
+      case KEY_A:
+        char1.moveLeft();
+        console.log(char1);
+        break;
+      case KEY_D:
+        char1.moveRight();
+        console.log(char1);
+        break;
+      case KEY_W:
+        char1.moveUp();
+        console.log(char1);
+        break;
+      case KEY_S:
+        char1.moveDown();
+        console.log(char1);
+        break;
+    }
+  };
+
+  var keyup = function (e) {
+    switch(e.which) {
+      case KEY_ONE:
+        console.log('1');
+        break;
+      case KEY_TWO:
+        console.log('2');
+        break;
+      case KEY_THREE:
+        console.log('3');
+        break;
+      case KEY_FOUR:
+        console.log('4');
+        break;
+    }
+  };
+
+  $(window).keydown(keydown);
   $(window).keyup(keyup);
 });
