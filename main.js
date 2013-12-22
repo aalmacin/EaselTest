@@ -28,10 +28,10 @@ $(document).ready(function() {
     framerate: 400,
     images: ['assets/images/char1.png'],
     frames: {width: 50, height: 150},
-    animations: {kick: [0, 1], attack: [2,3]}
+    animations: {normal: [0, 1], attack: [2,3], dead: [4], dying: [5,6], skill: [7]}
   };
   var char1Spritesheet = new createjs.SpriteSheet(char1Data);
-  var char1 = new Character(0, 0, 100, 20, 20, 40, 130, char1Spritesheet, 'attack');
+  var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'normal');
   stage.addChild(char1);
   stage.canvas.addEventListener('click', handleClick);
 
