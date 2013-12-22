@@ -1,15 +1,23 @@
+WIDTH: 200;
+HEIGHT: 200;
 var Base = function() {
-  WIDTH: 200,
-  HEIGHT: 200,
-  x: null,
-  y: null,
-  color: null,
-  obj: new createjs.graphics.Shape(),
-  init: function(x, y, color) {
-    this.x = x;
-    this.y = y;
-    this.color = color;
-
-    this.obj.graphics.beginFill(this.color).drawRect(this.x, this.y, this.WIDTH, this.HEIGHT);
-  }
+  createjs.Sprite.call(this);
 };
+
+Base.prototype = new createjs.Sprite();
+/*
+
+  this.base = new createjs.bitmap('assets/images/base.png');
+  this.enemy_base = new createjs.bitmap('assets/images/base.png');
+
+  var base_image = this.base.image;
+  var enemy_base_image = this.enemy_base.image;
+  console.log(base_image.constructor.name);
+  for (a in base_image ) {
+  }
+
+  //console.log(base_image);
+
+  //this.obj.addChild(this.base);
+  this.addChild(this.enemy_base);
+*/
