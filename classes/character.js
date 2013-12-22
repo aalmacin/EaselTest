@@ -1,5 +1,5 @@
-var WIDTH = 100;
-var HEIGHT = 50;
+var WIDTH = 50;
+var HEIGHT = 150;
 var MOVEMENT_SPEED = 10;
 
 var Character = function(x, y, life, attack, defense, abilityPower, speed) {
