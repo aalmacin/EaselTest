@@ -2,8 +2,8 @@ var WIDTH = 50;
 var HEIGHT = 150;
 var MOVEMENT_SPEED = 10;
 
-var Character = function(x, y, life, attack, defense, abilityPower, speed) {
-  createjs.Sprite.call(this);
+var Character = function(x, y, life, attack, defense, abilityPower, speed, spritesheet, defaultAnim) {
+  createjs.Sprite.call(this, spritesheet, defaultAnim);
   this.x = x;
   this.y = y;
   this.life = life;

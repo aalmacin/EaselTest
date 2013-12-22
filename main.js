@@ -1,4 +1,7 @@
+var KEY_Q = 81;
 var KEY_W = 87;
+var KEY_E = 69;
+var KEY_R = 82;
 var KEY_S = 83;
 var KEY_A = 65;
 var KEY_D = 68;
@@ -11,6 +14,7 @@ var KEY_SEMICOLON = 186;
 var MAIN_STAGE = 'mainStage';
 var BACKGROUND_PATH = 'assets/images/gameArea.png';
 
+/*
 var keydown = function (e) {
   switch(e.which) {
     case KEY_J:
@@ -27,20 +31,21 @@ var keydown = function (e) {
       break;
   }
 };
+*/
 
 var keyup = function (e) {
   switch(e.which) {
+    case KEY_Q:
+      console.log('Q');
+      break;
     case KEY_W:
       console.log('W');
       break;
-    case KEY_S:
-      console.log('S');
+    case KEY_E:
+      console.log('E');
       break;
-    case KEY_A:
-      console.log('A');
-      break;
-    case KEY_D:
-      console.log('D');
+    case KEY_R:
+      console.log('R');
       break;
   }
 };
@@ -50,7 +55,17 @@ $(document).ready(function() {
   createjs.Ticker.addEventListener('tick', stage);
   var base = new Base();
   var enemy_base = new Base();
+  var char1Data = {
+    framerate: 400,
+    images: ['assets/images/char1.png'],
+    frames: {width: 50, height: 150},
+    animations: {kick: [0, 1], attack: [2,3]}
+  };
+  var char1Spritesheet = new createjs.SpriteSheet(char1Data);
+  console.log(char1Spritesheet);
+  var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'attack');
+  stage.addChild(char1);
 
-  $(window).keydown(keydown);
+  //$(window).keydown(keydown);
   $(window).keyup(keyup);
 });
