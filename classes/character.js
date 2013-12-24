@@ -1,5 +1,7 @@
-var WIDTH = 50;
-var HEIGHT = 150;
+var STAGE_WIDTH = 768;
+var STAGE_HEIGHT = 1024;
+var SPRITE_WIDTH = 50;
+var SPRITE_HEIGHT = 150;
 var MOVEMENT_TARGET = 50;
 var MAX_SPEED = 1000;
 
@@ -12,34 +14,56 @@ var Character = function(x, y, life, attack, defense, abilityPower, speed, sprit
   this.defense = defense;
   this.abilityPower = abilityPower;
   this.speed = MAX_SPEED - (speed * 10);
-  console.log(this.speed);
+  this.setBounds(this.x, this.y, SPRITE_WIDTH, SPRITE_HEIGHT);
 };
 
 Character.prototype = new createjs.Sprite();
 
 Character.prototype.moveUp = function() {
-  createjs.Tween.get(this, {override: true}).to({y: this.y - MOVEMENT_TARGET}, this.speed).call(backToNormal);
+  var destination = (this.y - MOVEMENT_TARGET);
+  var boundsRect = this.getBounds();
+  if (destination < 0) destination = 0;
+  createjs.Tween.get(this, {override: true}).to({y: destination}, this.speed).call(backToNormal);
+  boundsRect.x = this.x;
+  boundsRect.y = this.y;
   function backToNormal() {
     console.log('back');
   }
 };
 
 Character.prototype.moveDown = function() {
-  createjs.Tween.get(this, {override: true}).to({y: this.y + MOVEMENT_TARGET}, this.speed).call(backToNormal);
+  var destination = (this.y + MOVEMENT_TARGET);
+  var boundsRect = this.getBounds();
+  var limit = (STAGE_HEIGHT - SPRITE_HEIGHT);
+  if (destination > limit) destination = limit;
+  createjs.Tween.get(this, {override: true}).to({y: destination}, this.speed).call(backToNormal);
+  boundsRect.x = this.x;
+  boundsRect.y = this.y;
   function backToNormal() {
     console.log('back');
   }
 };
 
 Character.prototype.moveLeft = function() {
-  createjs.Tween.get(this, {override: true}).to({x: this.x - MOVEMENT_TARGET}, this.speed).call(backToNormal);
+  var destination = (this.x - MOVEMENT_TARGET);
+  var boundsRect = this.getBounds();
+  if (destination < 0) destination = 0;
+  createjs.Tween.get(this, {override: true}).to({x: destination}, this.speed).call(backToNormal);
+  boundsRect.x = this.x;
+  boundsRect.y = this.y;
   function backToNormal() {
     console.log('back');
   }
 };
 
 Character.prototype.moveRight = function() {
-  createjs.Tween.get(this, {override: true}).to({x: this.x + MOVEMENT_TARGET}, this.speed).call(backToNormal);
+  var destination = (this.x + MOVEMENT_TARGET);
+  var boundsRect = this.getBounds();
+  var limit = (STAGE_WIDTH - SPRITE_WIDTH);
+  if (destination > limit) destination = limit;
+  createjs.Tween.get(this, {override: true}).to({x: destination}, this.speed).call(backToNormal);
+  boundsRect.x = this.x;
+  boundsRect.y = this.y;
   function backToNormal() {
     console.log('back');
   }
