@@ -25,20 +25,24 @@ $(document).ready(function() {
   var base = new Base();
   var enemy_base = new Base();
   var char1Data = {
-    framerate: 400,
+    framerate: 3,
     images: ['assets/images/char1.png'],
     frames: {width: 50, height: 150},
-    animations: {normal: [0, 1], attack: [2,3], dead: [4], dying: [5,6], skill: [7]}
+    animations: {normal: [0, 1], attack: [2], hit: [3], dead: [4], dying: [5,6], skill: [7]}
   };
   var char1Spritesheet = new createjs.SpriteSheet(char1Data);
   var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'normal');
   stage.addChild(char1);
-  stage.canvas.addEventListener('click', handleClick);
+  stage.canvas.addEventListener('mousedown', handleMouseDown);
+  stage.canvas.addEventListener('mouseup', handleMouseUp);
 
-  function handleClick(e) {
-    //char1.targetX = e.x;
-    //char1.targetY = e.y;
-    console.log(char1);
+  function handleMouseDown(e) {
+    console.log(char1.gotoAndPlay('attack'));
+  }
+
+
+  function handleMouseUp(e) {
+    console.log(char1.gotoAndPlay('normal'));
   }
 
   var keydown = function (e) {
