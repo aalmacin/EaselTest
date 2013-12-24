@@ -15,9 +15,18 @@ var Character = function(x, y, life, attack, defense, abilityPower, speed, sprit
   this.abilityPower = abilityPower;
   this.speed = MAX_SPEED - (speed * 10);
   this.setBounds(this.x, this.y, SPRITE_WIDTH, SPRITE_HEIGHT);
+
+  this.backtonormal = new createjs.Event('backtonormal');
+  this.addEventListener('backtonormal', this.doBackToNormal);
+
+  this.addEventListener('tick', this.handleTick);
 };
 
 Character.prototype = new createjs.Sprite();
+
+Character.prototype.handleTick = function(e) {
+  window.scrollTo(0, e.currentTarget.y);
+}
 
 Character.prototype.moveUp = function() {
   var destination = (this.y - MOVEMENT_TARGET);
@@ -69,3 +78,21 @@ Character.prototype.moveRight = function() {
   }
 };
 
+Character.prototype.doAttack = function() {
+  this.gotoAndPlay('attack');
+
+  var that = this;
+  setTimeout(function () {
+    console.log(that);
+    that.dispatchEvent(that.backtonormal);
+  }, 100);
+
+};
+
+Character.prototype.backToNormal = function() {
+  this.gotoAndPlay('normal');
+};
+
+Character.prototype.doBackToNormal = function(e) {
+  e.target.backToNormal();
+};

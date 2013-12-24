@@ -37,12 +37,12 @@ $(document).ready(function() {
   stage.canvas.addEventListener('mouseup', handleMouseUp);
 
   function handleMouseDown(e) {
-    char1.gotoAndPlay('attack');
+    char1.doAttack();
   }
 
 
   function handleMouseUp(e) {
-    char1.gotoAndPlay('normal');
+    char1.backToNormal();
   }
 
   var keydown = function (e) {
