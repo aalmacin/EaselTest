@@ -81,4 +81,11 @@ $(document).ready(function() {
 
   $(window).keydown(keydown);
   $(window).keyup(keyup);
+
+  function wheel(e) {
+    e.preventDefault();
+  }
+  if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
+  window.onmousewheel = document.onmousewheel = wheel;
+
 });
