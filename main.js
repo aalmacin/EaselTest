@@ -20,18 +20,39 @@ var MAIN_STAGE = 'mainStage';
 var BACKGROUND_PATH = 'assets/images/gameArea.png';
 
 $(document).ready(function() {
+  $.getJSON('data/character.json', function(data) {
+    var selectField = $('#champSelect select');
+    var buttonField = $('#champSelect button');
+    $(data).each(function() {
+      selectField.append($('<option value="' + this.id + '">' + this.Name + '</option>'));
+    });
+    buttonField.click(function() {
+      $(data).each(function() {
+        if (this.id == selectField.val()) startGame(this);
+      });
+      $('#champSelect').remove();
+    });
+  });
+});
+
+function startGame(char1Data) {
   var stage = new Stage(MAIN_STAGE, BACKGROUND_PATH);
   createjs.Ticker.addEventListener('tick', stage);
   var base = new Base();
   var enemy_base = new Base();
-  var char1Data = {
-    framerate: 3,
-    images: ['assets/images/char1.png'],
-    frames: {width: 50, height: 150},
-    animations: {normal: [0, 1], attack: [2], hit: [3], dead: [4], dying: [5,6], skill: [7]}
-  };
-  var char1Spritesheet = new createjs.SpriteSheet(char1Data);
-  var char1 = new Character(0, 0, 100, 20, 20, 40, 30, char1Spritesheet, 'normal');
+  var char1 = null;
+  var char1SpriteSheet = new createjs.SpriteSheet(char1Data.spritesheetData);
+  char1 = new Character(
+    0,
+    0,
+    char1Data.life,
+    char1Data.attack,
+    char1Data.defense,
+    char1Data.abilityPower,
+    char1Data.speed,
+    char1SpriteSheet,
+    'normal'
+  );
   stage.addChild(char1);
   stage.canvas.addEventListener('mousedown', handleMouseDown);
   stage.canvas.addEventListener('mouseup', handleMouseUp);
@@ -87,5 +108,4 @@ $(document).ready(function() {
   }
   if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
   window.onmousewheel = document.onmousewheel = wheel;
-
-});
+}

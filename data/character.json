@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "Name": "Dragneel",
+    "life": 100,
+    "attack": 20,
+    "defense": 20,
+    "abilityPower": 40,
+    "speed": 30,
+    "spritesheetData": {
+      "framerate": 3,
+      "images": ["assets/images/char1.png"],
+      "frames": {
+        "width": 50,
+        "height": 150
+      },
+      "animations": {
+        "normal": [0,1],
+        "attack": [2],
+        "hit": [3],
+        "dead": [4],
+        "dying": [5,6],
+        "skill": [7]
+      }
+    }
+  },
+  {
+    "id": 2,
+    "Name": "Elfman",
+    "life": 400,
+    "attack": 10,
+    "defense": 50,
+    "abilityPower": 10,
+    "speed": 10,
+    "spritesheetData": {
+      "framerate": 3,
+      "images": ["assets/images/char1.png"],
+      "frames": {
+        "width": 50,
+        "height": 150
+      },
+      "animations": {
+        "normal": [0,1],
+        "attack": [2],
+        "hit": [3],
+        "dead": [4],
+        "dying": [5,6],
+        "skill": [7]
+      }
+    }
+  }
+]
