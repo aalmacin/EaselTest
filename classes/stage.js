@@ -1,4 +1,4 @@
-var WIDTH = 768;
+var WIDTH = 1024;
 var HEIGHT = 1024;
 function Stage(canvasID, bgImageFilename){
   createjs.Stage.call(this, canvasID);
