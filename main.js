@@ -20,6 +20,7 @@ var MAIN_STAGE = 'mainStage';
 var BACKGROUND_PATH = 'assets/images/gameArea.png';
 
 $(document).ready(function() {
+  $('#main').hide();
   $.getJSON('data/character.json', function(data) {
     var selectField = $('#champSelect select');
     var buttonField = $('#champSelect button');
@@ -30,6 +31,7 @@ $(document).ready(function() {
       $(data).each(function() {
         if (this.id == selectField.val()) startGame(this);
       });
+      $('#main').show();
       $('#champSelect').remove();
     });
   });
@@ -38,8 +40,22 @@ $(document).ready(function() {
 function startGame(char1Data) {
   var stage = new Stage(MAIN_STAGE, BACKGROUND_PATH);
   createjs.Ticker.addEventListener('tick', stage);
-  var base = new Base();
-  var enemy_base = new Base();
+  var baseSpriteSheetData = {
+    "framerate": 3,
+    "images": ["assets/images/base.png"],
+    "frames": {
+      "width": 200,
+      "height": 200
+    },
+    "animations": {
+      "highLife": [0]
+    }
+  }
+  var baseSpriteSheet = new createjs.SpriteSheet(baseSpriteSheetData);
+  var base = new Base(baseSpriteSheet, (STAGE_WIDTH / 2) - (baseSpriteSheetData.frames.width / 2), (STAGE_HEIGHT - (baseSpriteSheetData.frames.height)));
+  var enemy_base = new Base(baseSpriteSheet, (STAGE_WIDTH / 2) - (baseSpriteSheetData.frames.width / 2), 0);
+  stage.addChild(base);
+  stage.addChild(enemy_base);
   var char1 = null;
   var char1SpriteSheet = new createjs.SpriteSheet(char1Data.spritesheetData);
   char1 = new Character(
@@ -51,7 +67,7 @@ function startGame(char1Data) {
     char1Data.abilityPower,
     char1Data.speed,
     char1SpriteSheet,
-    'normal'
+    char1Data.spritesheetData.animations.normal
   );
   stage.addChild(char1);
   stage.canvas.addEventListener('mousedown', handleMouseDown);

@@ -1,7 +1,11 @@
-WIDTH: 200;
-HEIGHT: 200;
-var Base = function() {
-  createjs.Sprite.call(this);
+var BASE_WIDTH = 200;
+var BASE_HEIGHT = 200;
+var BASE_LIFE = 400;
+var Base = function(spritesheet, x, y) {
+  createjs.Sprite.call(this, spritesheet, 'highLife');
+  this.life = BASE_LIFE;
+  this.x = x;
+  this.y = y;
 };
 
 Base.prototype = new createjs.Sprite();

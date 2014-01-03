@@ -14,7 +14,6 @@ var Character = function(x, y, life, attack, defense, abilityPower, speed, sprit
   this.defense = defense;
   this.abilityPower = abilityPower;
   this.speed = MAX_SPEED - (speed * 10);
-  this.setBounds(this.x, this.y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
   this.backtonormal = new createjs.Event('backtonormal');
   this.addEventListener('backtonormal', this.doBackToNormal);
@@ -26,6 +25,15 @@ Character.prototype = new createjs.Sprite();
 
 Character.prototype.handleTick = function(e) {
   window.scrollTo(0, e.currentTarget.y);
+  e.currentTarget.setBounds(e.currentTarget.x, e.currentTarget.y, e.currentTarget.spriteSheet._frameWidth, e.currentTarget.spriteSheet._frameHeight);
+  var statHolder = $('.statHolder');
+  statHolder.find('.x span').html(Math.round(e.currentTarget.x));
+  statHolder.find('.y span').html(Math.round(e.currentTarget.y));
+  statHolder.find('.life span').html(e.currentTarget.life);
+  statHolder.find('.attack span').html(e.currentTarget.attack);
+  statHolder.find('.defense span').html(e.currentTarget.defense);
+  statHolder.find('.abilityPower span').html(e.currentTarget.abilityPower);
+  statHolder.find('.speed span').html(e.currentTarget.speed);
 }
 
 Character.prototype.moveUp = function() {
@@ -83,7 +91,6 @@ Character.prototype.doAttack = function() {
 
   var that = this;
   setTimeout(function () {
-    console.log(that);
     that.dispatchEvent(that.backtonormal);
   }, 100);
 
