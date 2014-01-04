@@ -8,15 +8,14 @@
     "abilityPower": 40,
     "speed": 30,
     "spritesheetData": {
-      "framerate": 3,
-      "images": ["assets/images/char1.png"],
+      "framerate": 5,
+      "images": ["assets/images/characters/Issdel/Issdel.png"],
       "frames": {
-        "width": 50,
-        "height": 150
+        "width": 120,
+        "height": 170
       },
       "animations": {
-        "normal": [0,1],
-        "attack": [2],
+        "normal": [0,1,2,3],
         "hit": [3],
         "dead": [4],
         "dying": [5,6],
